@@ -1,6 +1,6 @@
 // Global Vars
 const calcText = document.getElementById("calcText");
-const operatorRegExp = /[+\-x\/]/gi;
+const operatorRegExp = /[+x\-\/]/gi;
 
 let firstNumber = "";
 let operator = "";
@@ -9,7 +9,10 @@ let secondNumber = "";
 
 function interpretInput(e) {
   const term = convertToNumber(e.target.innerText);
-  console.log(term);
+  // console.log(term);
+  if (calcText.innerText == "undefined! #troll") {
+    clearDisplay();
+  }
 
   if (isANumber(term)) {
     if (isEmpty(operator)) {
@@ -34,7 +37,11 @@ function interpretInput(e) {
       case "+":
       case "X":
       case "/":
-        updateOperator(term);
+        if (haveAllItems()) {
+          chainAnswer(term);
+        } else {
+          updateOperator(term);
+        }
         break;
       case "=":
         returnAnswer();
@@ -116,11 +123,10 @@ function clearDisplay() {
   secondNumber = "";
 }
 
-function updateOperator(term) {
-  // check if secondNumber exists
 
-  // if there is no second number
-  if (isEmpty(secondNumber)) {
+function updateOperator(term) {
+  // enter only if there is a first number
+  if (!isEmpty(firstNumber)) {
     // if is no operator yet
     if (isEmpty(operator)) {
       updateDisplay(term);
@@ -132,37 +138,63 @@ function updateOperator(term) {
   }
 }
 
+function round(num) {
+  return Math.round(num * 100) / 100;
+}
+
 function returnAnswer() {
   // only enter this block if all 3 components exist
-  if (!isEmpty(firstNumber) && !isEmpty(operator) && !isEmpty(secondNumber)) {
-    let answer;
-    let firstNumberConverted = Number(firstNumber);
-    let secondNumberConverted = Number(secondNumber);
-    switch (operator){
-      case "+":
-        answer = firstNumberConverted + secondNumberConverted;
-        break;
-      case "-":
-        answer = firstNumberConverted + secondNumberConverted;
-        break;
-      case "X":
-        answer = firstNumberConverted * secondNumberConverted;
-        break;
-      case "/":
-        answer = firstNumberConverted / secondNumberConverted;
-        break;
-    }
-
-    answer = answer.toString();
-
+  if (haveAllItems()) {
+    let answer = performCalculation();
     calcText.innerText = answer;
     firstNumber = answer;
     operator = "";
     secondNumber = "";
   }
-
 }
 
+function performCalculation() {
+  let answer;
+  let firstNumberConverted = Number(firstNumber);
+  let secondNumberConverted = Number(secondNumber);
+  switch (operator){
+    case "+":
+      answer = firstNumberConverted + secondNumberConverted;
+      break;
+    case "-":
+      answer = firstNumberConverted + secondNumberConverted;
+      break;
+    case "X":
+      answer = round(firstNumberConverted * secondNumberConverted);
+      break;
+    case "/":
+      if (secondNumberConverted === 0) {
+        answer = "undefined! #troll"
+      } else {
+        answer = round(firstNumberConverted / secondNumberConverted);
+      }
+      break;
+  }
+
+  return answer.toString();
+}
+
+
+function haveAllItems() {
+  if (!isEmpty(firstNumber) && !isEmpty(operator) && !isEmpty(secondNumber)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function chainAnswer(newOperator) {
+  let answer = performCalculation();
+  operator = newOperator;
+  calcText.innerText = answer + operator;
+  firstNumber = answer;
+  secondNumber = "";
+}
 
 
 const allButtons = [...document.querySelectorAll("button")];
