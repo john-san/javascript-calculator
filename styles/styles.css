@@ -37,7 +37,7 @@ h1 {
 
 #calcText {
   padding-right: 15px;
-  font-size: 32px;
+  font-size: 24px;
 }
 
 #calcInput {
@@ -49,7 +49,7 @@ h1 {
 
 #numberColumns {
   background: yellow;
-  width: 70%;
+  width: 75%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@ h1 {
 
 #operationColumn {
   background: orange;
-  width: 30%;
+  width: 25%;
   height: 100%;
 }
 
@@ -83,6 +83,6 @@ button:hover {
 
 .op-col-btn {
   min-width: 100%;
-  min-height: 20%;
+  min-height: 16.66%;
   background-color: grey;
 }
