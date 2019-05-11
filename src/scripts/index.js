@@ -29,10 +29,10 @@ function interpretInput(e) {
       case ".":
         addDecimal();
         break;
-      case "DEL":
+      case "←":
         delOneCharacter();
         break;
-      case "CLR":
+      case "C":
         clearDisplay();
         break;
       case "-":
