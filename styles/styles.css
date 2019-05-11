@@ -8,8 +8,9 @@ h1 {
 
 #calc {
   background-color: grey;
-  width: 400px;
+  width: 100%;
   height: 400px;
+  max-width: 400px;
   border: solid 2px #000;
   margin: 0 auto;
   box-sizing: border-box;
