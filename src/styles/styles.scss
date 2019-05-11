@@ -42,14 +42,12 @@ h1 {
 }
 
 #calcInput {
-  background: blue;
   height: 75%;
   display: flex;
   flex-direction: row;
 }
 
 #numberColumns {
-  background: yellow;
   width: 75%;
   height: 100%;
   display: flex;
@@ -59,7 +57,6 @@ h1 {
 
 
 #operationColumn {
-  background: orange;
   width: 25%;
   height: 100%;
 }

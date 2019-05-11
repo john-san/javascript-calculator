@@ -1,3 +1,5 @@
+import '../styles/styles.scss';
+
 // Global Vars
 const calcText = document.getElementById("calcText");
 const operatorRegExp = /[+x\-\/]/gi;
